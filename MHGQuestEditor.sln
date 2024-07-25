@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MHGQuestEditor", "MHGQuestEditor\MHGQuestEditor.csproj", "{B20FD85C-E56A-47D3-9103-1FC4FDEE02CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B20FD85C-E56A-47D3-9103-1FC4FDEE02CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B20FD85C-E56A-47D3-9103-1FC4FDEE02CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B20FD85C-E56A-47D3-9103-1FC4FDEE02CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B20FD85C-E56A-47D3-9103-1FC4FDEE02CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {08CCC82C-AB97-42A0-9CEA-3DB23E32C96A}
+	EndGlobalSection
+EndGlobal
