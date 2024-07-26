@@ -162,7 +162,7 @@ Quest progression code
 No arg means to leave them at 0
 
 | Value | Description | arg1-3 |
-| - | - |
+| - | - | - |
 | 27 | At the start of every quest, initiates quest timer and other data | None |
 | 2 | Set a monster slaying goal | 1: Monster ID, 2: Amount |
 | 4 | Set an item delivery goal | 1: Item ID, 2: Amount |
