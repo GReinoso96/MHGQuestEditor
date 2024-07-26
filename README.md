@@ -47,7 +47,7 @@ All "Ptr" variables here will be ignored when regenerating a .mib file.
 
 ### Supply Types
 | Value | Description | supplyMon | supplyNum |
-| - | - |
+| - | - | - | - |
 | 0 | Delivered at the start | Unused | Unused |
 | 1 | Delivered at Random | Unused | Unused |
 | 2 | Slay x Monster n times | Monster to slay | Number of slays |
