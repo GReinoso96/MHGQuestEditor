@@ -38,6 +38,15 @@
             winCond = new TextBox();
             label1 = new Label();
             groupBox2 = new GroupBox();
+            flag7 = new CheckBox();
+            flag6 = new CheckBox();
+            flag5 = new CheckBox();
+            flag4 = new CheckBox();
+            flag3 = new CheckBox();
+            flag2 = new CheckBox();
+            flag1 = new CheckBox();
+            flag0 = new CheckBox();
+            debugLbl = new Label();
             qstCond = new TextBox();
             label19 = new Label();
             label18 = new Label();
@@ -55,8 +64,6 @@
             fee = new NumericUpDown();
             label12 = new Label();
             starLvl = new NumericUpDown();
-            label11 = new Label();
-            questFlags = new TextBox();
             questType = new ComboBox();
             label10 = new Label();
             difficulty = new ComboBox();
@@ -71,10 +78,20 @@
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             groupBox4 = new GroupBox();
+            splitContainer1 = new SplitContainer();
+            rwdGroupName = new Label();
+            rwdGroupType = new NumericUpDown();
+            rwdGroupLB = new ListBox();
+            label24 = new Label();
+            label23 = new Label();
+            rwdListChance = new NumericUpDown();
+            rwdListQty = new NumericUpDown();
+            rwdListCB = new ComboBox();
+            rwdListLB = new ListBox();
             groupBox3 = new GroupBox();
-            supplyGrid = new DataGridView();
-            itemNameSup = new DataGridViewComboBoxColumn();
-            itemQtySup = new DataGridViewTextBoxColumn();
+            supplyItemAmount = new NumericUpDown();
+            supplyItemId = new ComboBox();
+            supplyLB = new ListBox();
             label22 = new Label();
             label21 = new Label();
             label20 = new Label();
@@ -94,8 +111,16 @@
             ((System.ComponentModel.ISupportInitialize)bossSize).BeginInit();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)rwdGroupType).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)rwdListChance).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)rwdListQty).BeginInit();
             groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)supplyGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)supplyItemAmount).BeginInit();
             ((System.ComponentModel.ISupportInitialize)supplyQty).BeginInit();
             SuspendLayout();
             // 
@@ -188,6 +213,15 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(flag7);
+            groupBox2.Controls.Add(flag6);
+            groupBox2.Controls.Add(flag5);
+            groupBox2.Controls.Add(flag4);
+            groupBox2.Controls.Add(flag3);
+            groupBox2.Controls.Add(flag2);
+            groupBox2.Controls.Add(flag1);
+            groupBox2.Controls.Add(flag0);
+            groupBox2.Controls.Add(debugLbl);
             groupBox2.Controls.Add(qstCond);
             groupBox2.Controls.Add(label19);
             groupBox2.Controls.Add(label18);
@@ -205,8 +239,6 @@
             groupBox2.Controls.Add(fee);
             groupBox2.Controls.Add(label12);
             groupBox2.Controls.Add(starLvl);
-            groupBox2.Controls.Add(label11);
-            groupBox2.Controls.Add(questFlags);
             groupBox2.Controls.Add(questType);
             groupBox2.Controls.Add(label10);
             groupBox2.Controls.Add(difficulty);
@@ -224,6 +256,95 @@
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
             groupBox2.Text = "General";
+            // 
+            // flag7
+            // 
+            flag7.AutoSize = true;
+            flag7.Location = new Point(401, 197);
+            flag7.Name = "flag7";
+            flag7.Size = new Size(131, 19);
+            flag7.TabIndex = 40;
+            flag7.Text = "noDifficultyIncrease";
+            flag7.UseVisualStyleBackColor = true;
+            // 
+            // flag6
+            // 
+            flag6.AutoSize = true;
+            flag6.Location = new Point(401, 172);
+            flag6.Name = "flag6";
+            flag6.Size = new Size(108, 19);
+            flag6.TabIndex = 39;
+            flag6.Text = "noDifficultyRoll";
+            flag6.UseVisualStyleBackColor = true;
+            // 
+            // flag5
+            // 
+            flag5.AutoSize = true;
+            flag5.Location = new Point(401, 147);
+            flag5.Name = "flag5";
+            flag5.Size = new Size(106, 19);
+            flag5.TabIndex = 38;
+            flag5.Text = "maxTimerClear";
+            flag5.UseVisualStyleBackColor = true;
+            // 
+            // flag4
+            // 
+            flag4.AutoSize = true;
+            flag4.Location = new Point(401, 122);
+            flag4.Name = "flag4";
+            flag4.Size = new Size(87, 19);
+            flag4.TabIndex = 37;
+            flag4.Text = "noFarcaster";
+            flag4.UseVisualStyleBackColor = true;
+            // 
+            // flag3
+            // 
+            flag3.AutoSize = true;
+            flag3.Location = new Point(401, 97);
+            flag3.Name = "flag3";
+            flag3.Size = new Size(83, 19);
+            flag3.TabIndex = 36;
+            flag3.Text = "catlessScat";
+            flag3.UseVisualStyleBackColor = true;
+            // 
+            // flag2
+            // 
+            flag2.AutoSize = true;
+            flag2.Location = new Point(401, 72);
+            flag2.Name = "flag2";
+            flag2.Size = new Size(93, 19);
+            flag2.TabIndex = 35;
+            flag2.Text = "urgentMusic";
+            flag2.UseVisualStyleBackColor = true;
+            // 
+            // flag1
+            // 
+            flag1.AutoSize = true;
+            flag1.Location = new Point(401, 47);
+            flag1.Name = "flag1";
+            flag1.Size = new Size(84, 19);
+            flag1.TabIndex = 34;
+            flag1.Text = "silentBattle";
+            flag1.UseVisualStyleBackColor = true;
+            // 
+            // flag0
+            // 
+            flag0.AutoSize = true;
+            flag0.Location = new Point(401, 22);
+            flag0.Name = "flag0";
+            flag0.Size = new Size(78, 19);
+            flag0.TabIndex = 33;
+            flag0.Text = "bbqQuest";
+            flag0.UseVisualStyleBackColor = true;
+            // 
+            // debugLbl
+            // 
+            debugLbl.AutoSize = true;
+            debugLbl.Location = new Point(76, 232);
+            debugLbl.Name = "debugLbl";
+            debugLbl.Size = new Size(44, 15);
+            debugLbl.TabIndex = 32;
+            debugLbl.Text = "label25";
             // 
             // qstCond
             // 
@@ -368,22 +489,6 @@
             starLvl.Size = new Size(121, 23);
             starLvl.TabIndex = 15;
             // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Location = new Point(37, 138);
-            label11.Name = "label11";
-            label11.Size = new Size(34, 15);
-            label11.TabIndex = 14;
-            label11.Text = "Flags";
-            // 
-            // questFlags
-            // 
-            questFlags.Location = new Point(76, 135);
-            questFlags.Name = "questFlags";
-            questFlags.Size = new Size(121, 23);
-            questFlags.TabIndex = 13;
-            // 
             // questType
             // 
             questType.FormattingEnabled = true;
@@ -505,6 +610,7 @@
             // 
             // groupBox4
             // 
+            groupBox4.Controls.Add(splitContainer1);
             groupBox4.Location = new Point(369, 279);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(601, 392);
@@ -512,9 +618,118 @@
             groupBox4.TabStop = false;
             groupBox4.Text = "Rewards";
             // 
+            // splitContainer1
+            // 
+            splitContainer1.Location = new Point(8, 22);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(rwdGroupName);
+            splitContainer1.Panel1.Controls.Add(rwdGroupType);
+            splitContainer1.Panel1.Controls.Add(rwdGroupLB);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(label24);
+            splitContainer1.Panel2.Controls.Add(label23);
+            splitContainer1.Panel2.Controls.Add(rwdListChance);
+            splitContainer1.Panel2.Controls.Add(rwdListQty);
+            splitContainer1.Panel2.Controls.Add(rwdListCB);
+            splitContainer1.Panel2.Controls.Add(rwdListLB);
+            splitContainer1.Size = new Size(587, 370);
+            splitContainer1.SplitterDistance = 236;
+            splitContainer1.TabIndex = 2;
+            // 
+            // rwdGroupName
+            // 
+            rwdGroupName.AutoSize = true;
+            rwdGroupName.Location = new Point(131, 14);
+            rwdGroupName.Name = "rwdGroupName";
+            rwdGroupName.Size = new Size(10, 15);
+            rwdGroupName.TabIndex = 2;
+            rwdGroupName.Text = " ";
+            rwdGroupName.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // rwdGroupType
+            // 
+            rwdGroupType.Location = new Point(5, 9);
+            rwdGroupType.Maximum = new decimal(new int[] { -1, 0, 0, 0 });
+            rwdGroupType.Name = "rwdGroupType";
+            rwdGroupType.Size = new Size(120, 23);
+            rwdGroupType.TabIndex = 1;
+            rwdGroupType.ValueChanged += rwdGroupType_ValueChanged;
+            // 
+            // rwdGroupLB
+            // 
+            rwdGroupLB.FormattingEnabled = true;
+            rwdGroupLB.ItemHeight = 15;
+            rwdGroupLB.Location = new Point(5, 38);
+            rwdGroupLB.Name = "rwdGroupLB";
+            rwdGroupLB.Size = new Size(220, 319);
+            rwdGroupLB.TabIndex = 0;
+            rwdGroupLB.SelectedIndexChanged += rwdGroupLB_SelectedIndexChanged;
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Location = new Point(201, 68);
+            label24.Name = "label24";
+            label24.Size = new Size(17, 15);
+            label24.TabIndex = 5;
+            label24.Text = "%";
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Location = new Point(204, 43);
+            label23.Name = "label23";
+            label23.Size = new Size(14, 15);
+            label23.TabIndex = 4;
+            label23.Text = "X";
+            // 
+            // rwdListChance
+            // 
+            rwdListChance.Location = new Point(224, 66);
+            rwdListChance.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            rwdListChance.Name = "rwdListChance";
+            rwdListChance.Size = new Size(108, 23);
+            rwdListChance.TabIndex = 3;
+            rwdListChance.ValueChanged += rwdListChance_ValueChanged;
+            // 
+            // rwdListQty
+            // 
+            rwdListQty.Location = new Point(224, 38);
+            rwdListQty.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            rwdListQty.Name = "rwdListQty";
+            rwdListQty.Size = new Size(108, 23);
+            rwdListQty.TabIndex = 2;
+            rwdListQty.ValueChanged += rwdListQty_ValueChanged;
+            // 
+            // rwdListCB
+            // 
+            rwdListCB.FormattingEnabled = true;
+            rwdListCB.Location = new Point(181, 9);
+            rwdListCB.Name = "rwdListCB";
+            rwdListCB.Size = new Size(151, 23);
+            rwdListCB.TabIndex = 1;
+            rwdListCB.SelectedIndexChanged += rwdListCB_SelectedIndexChanged;
+            // 
+            // rwdListLB
+            // 
+            rwdListLB.FormattingEnabled = true;
+            rwdListLB.ItemHeight = 15;
+            rwdListLB.Location = new Point(3, 9);
+            rwdListLB.Name = "rwdListLB";
+            rwdListLB.Size = new Size(172, 349);
+            rwdListLB.TabIndex = 0;
+            rwdListLB.SelectedIndexChanged += rwdListLB_SelectedIndexChanged;
+            // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(supplyGrid);
+            groupBox3.Controls.Add(supplyItemAmount);
+            groupBox3.Controls.Add(supplyItemId);
+            groupBox3.Controls.Add(supplyLB);
             groupBox3.Controls.Add(label22);
             groupBox3.Controls.Add(label21);
             groupBox3.Controls.Add(label20);
@@ -528,27 +743,33 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Supply";
             // 
-            // supplyGrid
+            // supplyItemAmount
             // 
-            supplyGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            supplyGrid.Columns.AddRange(new DataGridViewColumn[] { itemNameSup, itemQtySup });
-            supplyGrid.Location = new Point(6, 123);
-            supplyGrid.Name = "supplyGrid";
-            supplyGrid.Size = new Size(339, 263);
-            supplyGrid.TabIndex = 13;
+            supplyItemAmount.Location = new Point(208, 152);
+            supplyItemAmount.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            supplyItemAmount.Name = "supplyItemAmount";
+            supplyItemAmount.Size = new Size(137, 23);
+            supplyItemAmount.TabIndex = 15;
+            supplyItemAmount.ValueChanged += supplyItemAmount_ValueChanged;
             // 
-            // itemNameSup
+            // supplyItemId
             // 
-            itemNameSup.HeaderText = "Name";
-            itemNameSup.Name = "itemNameSup";
-            itemNameSup.Width = 220;
+            supplyItemId.FormattingEnabled = true;
+            supplyItemId.Location = new Point(208, 123);
+            supplyItemId.Name = "supplyItemId";
+            supplyItemId.Size = new Size(137, 23);
+            supplyItemId.TabIndex = 14;
+            supplyItemId.SelectionChangeCommitted += supplyItemId_SelectionChangeCommitted;
             // 
-            // itemQtySup
+            // supplyLB
             // 
-            itemQtySup.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            itemQtySup.HeaderText = "Amount";
-            itemQtySup.Name = "itemQtySup";
-            itemQtySup.Resizable = DataGridViewTriState.False;
+            supplyLB.FormattingEnabled = true;
+            supplyLB.ItemHeight = 15;
+            supplyLB.Location = new Point(6, 123);
+            supplyLB.Name = "supplyLB";
+            supplyLB.Size = new Size(196, 259);
+            supplyLB.TabIndex = 13;
+            supplyLB.SelectedIndexChanged += supplyLB_SelectedIndexChanged;
             // 
             // label22
             // 
@@ -633,9 +854,19 @@
             ((System.ComponentModel.ISupportInitialize)bossSize).EndInit();
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            groupBox4.ResumeLayout(false);
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel1.PerformLayout();
+            splitContainer1.Panel2.ResumeLayout(false);
+            splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)rwdGroupType).EndInit();
+            ((System.ComponentModel.ISupportInitialize)rwdListChance).EndInit();
+            ((System.ComponentModel.ISupportInitialize)rwdListQty).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)supplyGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)supplyItemAmount).EndInit();
             ((System.ComponentModel.ISupportInitialize)supplyQty).EndInit();
             ResumeLayout(false);
         }
@@ -666,8 +897,6 @@
         private TabPage tabPage2;
         private Label label10;
         private ComboBox questType;
-        private Label label11;
-        private TextBox questFlags;
         private Label label12;
         private NumericUpDown starLvl;
         private Label label15;
@@ -692,9 +921,28 @@
         private Label label22;
         private Label label21;
         private Label label20;
-        private DataGridView supplyGrid;
-        private DataGridViewComboBoxColumn itemNameSup;
-        private DataGridViewTextBoxColumn itemQtySup;
         private GroupBox groupBox4;
+        private Label debugLbl;
+        private NumericUpDown supplyItemAmount;
+        private ComboBox supplyItemId;
+        private ListBox supplyLB;
+        private ListBox rwdGroupLB;
+        private SplitContainer splitContainer1;
+        private Label label24;
+        private Label label23;
+        private NumericUpDown rwdListChance;
+        private NumericUpDown rwdListQty;
+        private ComboBox rwdListCB;
+        private ListBox rwdListLB;
+        private Label rwdGroupName;
+        private NumericUpDown rwdGroupType;
+        private CheckBox flag0;
+        private CheckBox flag7;
+        private CheckBox flag6;
+        private CheckBox flag5;
+        private CheckBox flag4;
+        private CheckBox flag3;
+        private CheckBox flag2;
+        private CheckBox flag1;
     }
 }

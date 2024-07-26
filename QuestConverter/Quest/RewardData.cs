@@ -9,7 +9,7 @@ namespace MHGQuestEditor.Quest
 {
     internal class RewardData
     {
-        public RewardData(BinaryReader br, long ptr, int type, long rewPtr)
+        public void load(BinaryReader br, long ptr, int type, long rewPtr)
         {
             br.BaseStream.Position = ptr;
             this.type = type;
@@ -31,7 +31,7 @@ namespace MHGQuestEditor.Quest
             }
         }
 
-        public RewardData(int type)
+        public void load(int type)
         {
             this.type=type;
             while (this.rewards.Count < 15)
@@ -40,21 +40,11 @@ namespace MHGQuestEditor.Quest
             }
         }
         public int type;
-        public List<RewardItem> rewards = new List<RewardItem>();
-
-        public override string ToString()
-        {
-            return RewardTypeDict[this.type];
-        }
+        public List<RewardItem> rewards = new();
     }
 
     internal class RewardItem(UInt16 chance, UInt16 id, UInt16 amount)
     {
         public UInt16 chance = chance; public UInt16 id = id; public UInt16 amount = amount;
-
-        public override string ToString()
-        {
-            return ItemNames[this.id];
-        }
     }
 }

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MHGQuestEditor", "MHGQuestEditor\MHGQuestEditor.csproj", "{B20FD85C-E56A-47D3-9103-1FC4FDEE02CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MHGQuestEditor", "MHGQuestEditor\MHGQuestEditor.csproj", "{B20FD85C-E56A-47D3-9103-1FC4FDEE02CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestConverter", "QuestConverter\QuestConverter.csproj", "{0AC4044C-AD4A-4047-91B5-770FBFA97BF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B20FD85C-E56A-47D3-9103-1FC4FDEE02CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B20FD85C-E56A-47D3-9103-1FC4FDEE02CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B20FD85C-E56A-47D3-9103-1FC4FDEE02CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AC4044C-AD4A-4047-91B5-770FBFA97BF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AC4044C-AD4A-4047-91B5-770FBFA97BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AC4044C-AD4A-4047-91B5-770FBFA97BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AC4044C-AD4A-4047-91B5-770FBFA97BF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

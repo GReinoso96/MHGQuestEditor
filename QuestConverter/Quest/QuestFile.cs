@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuestConverter.Quest;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,7 @@ namespace MHGQuestEditor.Quest
 {
     internal class QuestFile
     {
-
-        public QuestFile(BinaryReader br)
+        public void loadData(BinaryReader br)
         {
             br.BaseStream.Position = 0;
             this.dataPtr = br.ReadUInt32();
@@ -37,26 +37,42 @@ namespace MHGQuestEditor.Quest
             this.supplyMon = br.ReadByte();
             this.supplyNum = br.ReadByte();
 
-            this.questData = new QuestData(br, this.dataPtr);
+            // Visual Data
+            this.questData = new QuestData();
+            this.questData.load(br, dataPtr);
 
-            this.supplyData = new SupplyData(br, this.supplyPtr);
+            // Supplies
+            var supplies = new SupplyData();
+            supplies.load(br, this.supplyPtr);
+            this.supplyData = supplies;
 
+            // Rewards
             br.BaseStream.Position = this.rewardPtr;
             while(true) {
                 var curptr = br.BaseStream.Position;
                 var typeRew = br.ReadInt32();
                 var ptrRew = br.ReadUInt32();
                 if (typeRew == 0xFFFF) break;
-                this.rewardData.Add(new RewardData(br, curptr, typeRew, ptrRew));
+                var reward = new RewardData();
+                reward.load(br, curptr, typeRew, ptrRew);
+                this.rewardData.Add(reward);
                 br.BaseStream.Position = curptr+=8;
             };
-            while (this.rewardData.Count < 15)
+
+            // Script
+            br.BaseStream.Position = this.scriptPtr;
+            while (true)
             {
-                this.rewardData.Add(new RewardData(0));
+                var opcode = br.ReadUInt16();
+                var arg1 = br.ReadUInt16();
+                var arg2 = br.ReadUInt16();
+                var arg3 = br.ReadUInt16();
+                if (opcode > 0xFF) break;
+                this.scriptData.Add(new ScriptData(opcode, arg1, arg2, arg3));
             }
 
-
-            //this.rewardData = new RewardData(br, this.rewardPtr);
+            // Small Monsters
+            smallMons.load(br, this.sMonPtr);
         }
 
         public UInt32 dataPtr;
@@ -83,10 +99,14 @@ namespace MHGQuestEditor.Quest
         public byte supplyMon;
         public byte supplyNum;
 
-        public QuestData questData;
+        public QuestData questData = new();
 
-        public SupplyData supplyData;
+        public SupplyData supplyData = new();
 
-        public List<RewardData> rewardData = new List<RewardData>();
+        public List<RewardData> rewardData = [];
+
+        public List<ScriptData> scriptData = [];
+
+        public SmallMonsterWaves smallMons = new SmallMonsterWaves();
     }
 }

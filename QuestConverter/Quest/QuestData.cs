@@ -9,11 +9,11 @@ namespace MHGQuestEditor.Quest
 {
     internal class QuestData
     {
-        public QuestData(BinaryReader br, uint dataPtr)
+        public void load(BinaryReader br, uint dataPtr)
         {
             br.BaseStream.Position = dataPtr;
             this.type = br.ReadByte();
-            this.questFlags = new BitArray(new byte[]{br.ReadByte()});
+            this.questFlags = br.ReadByte();
             this.stars = br.ReadUInt16();
             this.fee = br.ReadUInt32();
             this.reward = br.ReadUInt32();
@@ -35,7 +35,7 @@ namespace MHGQuestEditor.Quest
             this.description = StringHelper.ReadUntilNull(br, strPtrs[3]).Replace("\n", "\r\n");
         }
         public byte type;
-        public BitArray questFlags;
+        public byte questFlags;
         public UInt16 stars;
         public UInt32 fee;
         public UInt32 reward;
