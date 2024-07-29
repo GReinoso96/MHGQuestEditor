@@ -1,5 +1,7 @@
-﻿using MHGQuestEditor.Quest;
+﻿using MHGQuestEditor;
+using MHGQuestEditor.Quest;
 using Newtonsoft.Json;
+using System.Runtime.CompilerServices;
 using System.Text;
 using static MHGQuestEditor.Constants;
 
@@ -24,6 +26,14 @@ if(args.Length > 0)
         QuestFile quest = ReadFromJsonFile<QuestFile>(args[0]);
 
         Console.WriteLine(quest.questData.title);
+        Console.WriteLine(quest.miniMapData[0].pos[0]);
+
+        using(FileStream fs = new FileStream($"out_{args[0].Replace(".json", ".mib")}", FileMode.OpenOrCreate, FileAccess.Write)) {
+            using(BinaryWriter bw = new BinaryWriter(fs, enc))
+            {
+                quest.write(bw);
+            }
+        }
     }
 }
 

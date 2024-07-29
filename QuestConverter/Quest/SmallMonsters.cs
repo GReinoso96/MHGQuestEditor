@@ -26,6 +26,7 @@ namespace MHGQuestEditor.Quest
                 this.waves.Add(wave);
             }
         }
+
         public List<SmallMonsterGroups> waves = [];
     }
     internal class SmallMonsterGroups
@@ -40,14 +41,23 @@ namespace MHGQuestEditor.Quest
                 var unk = br.ReadUInt32();
                 var cache = br.ReadUInt32();
                 var data = br.ReadUInt32();
-                if (stage > 90||stage==0x0) break;
+                if (stage > 90 || stage == 0x0)
+                {
+                    this.unkLine = [ stage, unk, cache, data ];
+                    break;
+                };
                 var curpos = br.BaseStream.Position;
                 var stagedata = new SmallMonsterStages();
                 stagedata.load(br, stage, unk, cache, data);
                 monstages.Add(stagedata);
                 br.BaseStream.Position = curpos;
             }
+
+
         }
+
+        public UInt32[] unkLine = [];
+        public UInt32 ptr;
 
         public List<SmallMonsterStages> monstages = [];
     }
@@ -77,11 +87,20 @@ namespace MHGQuestEditor.Quest
                 mon.load(id, variant, quantity, unk1, pos, unk2, angle);
                 monsters.Add(mon);
             }
+
+            br.BaseStream.Position = this.cachePtr;
+            for(int i = 0; i < 4;i++)
+            {
+                var cacheID = br.ReadUInt32();
+                this.cacheData.Add(cacheID);
+            }
         }
         public UInt32 stage;
         public UInt32 unk;
         public UInt32 cachePtr;
         public UInt32 dataPtr;
+
+        public List<UInt32> cacheData = [];
 
         public List<SmallMonsterData> monsters = [];
     }
@@ -95,7 +114,7 @@ namespace MHGQuestEditor.Quest
             this.quantity = qty;
             this.unk1 = Convert.ToHexString(unk1);
             this.pos = pos;
-            this.unk2 = Convert.ToHexString(unk1);
+            this.unk2 = Convert.ToHexString(unk2);
             this.angle = angle;//Convert.ToSingle(angle/255.0);
 
         }

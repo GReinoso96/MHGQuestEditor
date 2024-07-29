@@ -41,5 +41,29 @@ namespace MHGQuestEditor
                 return "Pointer out of bounds!";
             }
         }
+
+        public static void WriteAddNull(BinaryWriter bw, string text)
+        {
+            byte[] str = Encoding.GetEncoding("shift-jis").GetBytes(text);
+
+            foreach (byte chr in str)
+            {
+                bw.Write(chr);
+            }
+            bw.Write((byte)0x0);
+            /*
+            while (bw.BaseStream.Position % 4 != 0)
+            {
+                bw.Write((byte)0x0);
+            }*/
+        }
+
+        public static void WriteZero(BinaryWriter bw, int size)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                bw.Write((byte)0);
+            }
+        }
     }
 }
