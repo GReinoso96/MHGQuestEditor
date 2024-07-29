@@ -26,6 +26,7 @@ namespace QuestConverter.Quest
                 zones.Add(zone);
             }
         }
+        public UInt32 ptr;
         public List<ZoneData> zones = [];
     }
     internal class ZoneData

@@ -10,5 +10,7 @@ namespace QuestConverter.Quest
     {
         public UInt32 localeId;
         public UInt32 areaId;
+        public UInt32 unk1;
+        public UInt32 unk2;
     }
 }

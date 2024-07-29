@@ -25,6 +25,7 @@ namespace QuestConverter.Quest
                 this.Nodes.Add(node);
             }
         }
+        public UInt32 ptr;
         public List<GatherNode> Nodes = [];
     }
     internal class GatherNode

@@ -40,6 +40,7 @@ namespace MHGQuestEditor.Quest
             }
         }
         public int type;
+        public UInt32 ptr;
         public List<RewardItem> rewards = new();
     }
 

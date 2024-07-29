@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using static MHGQuestEditor.Constants;
 
 namespace MHGQuestEditor.Quest
@@ -167,6 +168,12 @@ namespace MHGQuestEditor.Quest
                 this.progressStr.Add(strProg);
                 br.BaseStream.Position = curPtr;
             }
+
+            br.BaseStream.Position = this.campPtr;
+            this.campData.localeId = br.ReadUInt32();
+            this.campData.areaId = br.ReadUInt32();
+            this.campData.unk1 = br.ReadUInt32();
+            this.campData.unk2 = br.ReadUInt32();
         }
 
         private UInt32 dataPtr;
@@ -216,6 +223,8 @@ namespace MHGQuestEditor.Quest
         public List<UniqueStage> uniquesData = [];
 
         public List<string> progressStr = [];
+
+        public CampData campData = new();
 
         public void write(BinaryWriter bw)
         {
@@ -371,15 +380,197 @@ namespace MHGQuestEditor.Quest
                 bw.Write((UInt16)code.arg3);
             }
 
+            // Progress String Dummy Space
+            this.progStrPtr = (UInt32)bw.BaseStream.Position;
+            foreach(var str in this.progressStr)
+            {
+                bw.Write((UInt32)0);
+            }
+
+            // Camp Data
+            this.campPtr = (UInt32)bw.BaseStream.Position;
+            bw.Write((UInt32)this.campData.localeId);
+            bw.Write((UInt32)this.campData.areaId);
+            bw.Write((UInt32)this.campData.unk1);
+            bw.Write((UInt32)this.campData.unk2);
+
+            // Write Zone Transitions
+            foreach(var zone in this.zoneData)
+            {
+                zone.ptr = (UInt32)bw.BaseStream.Position;
+                foreach (var node in zone.zones)
+                {
+                    bw.Write((UInt32)node.targetStg);
+                    bw.Write((Single)node.pos[0]);
+                    bw.Write((Single)node.pos[1]);
+                    bw.Write((Single)node.pos[2]);
+                    bw.Write((Single)node.size[0]);
+                    bw.Write((Single)node.size[1]);
+                    bw.Write(Convert.FromHexString(node.unk));
+                    bw.Write((Single)node.targetPos[0]);
+                    bw.Write((Single)node.targetPos[1]);
+                    bw.Write((Single)node.targetPos[2]);
+                    bw.Write((UInt32)node.targetAngle);
+                }
+                bw.Write((UInt32)0xFFFFFFFF);
+                bw.Write((Single)(-1.0));
+                StringHelper.WriteZero(bw, 0x2C);
+            }
+            this.zonePtr = (UInt32)bw.BaseStream.Position;
+            foreach (var zone in this.zoneData)
+            {
+                bw.Write((UInt32)zone.ptr);
+            }
+
+            // Mini Map Pos
+            this.originsPtr = (UInt32)bw.BaseStream.Position;
+            foreach(var org in this.miniMapData)
+            {
+                bw.Write((Single)org.pos[0]);
+                bw.Write((Single)org.pos[1]);
+                bw.Write((UInt32)org.unk1);
+                bw.Write((UInt32)org.unk2);
+                bw.Write((Single)org.unk3[0]);
+                bw.Write((Single)org.unk3[1]);
+                bw.Write((Single)org.unk3[2]);
+                bw.Write((UInt32)org.unk4);
+            }
+
+            // Supplies
+            this.supplyPtr = (UInt32)bw.BaseStream.Position;
+            foreach(var supply in this.supplyData.supplies)
+            {
+                bw.Write((UInt16)supply.id);
+                bw.Write((UInt16)supply.amount);
+            }
+
+            // Gather Stuff
+            bw.Write(Convert.FromHexString("00002D00"));
+            var dummyGatherData = (UInt32)bw.BaseStream.Position;
+            bw.Write(Convert.FromHexString("1900FFFF4B008D00FFFF0000"));
+            var dummyGatherPtr = (UInt32)bw.BaseStream.Position;
+            bw.Write((UInt32)dummyGatherData);
+            foreach(var group in this.gatherData)
+            {
+                if(group.Nodes.Count != 0)
+                {
+                    group.ptr = (UInt32)bw.BaseStream.Position;
+                    foreach (var node in group.Nodes)
+                    {
+                        bw.Write((Single)node.pos[0]);
+                        bw.Write((Single)node.pos[1]);
+                        bw.Write((Single)node.pos[2]);
+                        bw.Write((Single)node.size);
+                        bw.Write((UInt16)node.gatherID);
+                        bw.Write((UInt16)node.times);
+                        bw.Write((UInt16)node.type);
+                        bw.Write((UInt16)node.unk);
+                    }
+                    bw.Write((Single)(-1.0));
+                    StringHelper.WriteZero(bw, 0x14);
+                } else
+                {
+                    group.ptr = 0;
+                }
+            }
+            this.gatherPtr = (UInt32)bw.BaseStream.Position;
+            bw.Write((UInt32)dummyGatherPtr);
+            bw.Write((UInt32)0);
+            foreach (var group in this.gatherData)
+            {
+                bw.Write((UInt32)group.ptr);
+            }
+
+            // Uniques Stuff
+            foreach (var group in this.uniquesData)
+            {
+                if (group.Nodes.Count != 0)
+                {
+                    group.ptr = (UInt32)bw.BaseStream.Position;
+                    foreach (var node in group.Nodes)
+                    {
+                        bw.Write((UInt16)node.id);
+                        bw.Write((UInt16)node.type);
+                        bw.Write((Single)node.pos[0]);
+                        bw.Write((Single)node.pos[1]);
+                        bw.Write((Single)node.pos[2]);
+                        bw.Write((Single)node.size);
+                        bw.Write((UInt32)node.angle);
+                    }
+                    bw.Write((UInt32)0);
+                    bw.Write((Single)(-1.0));
+                    StringHelper.WriteZero(bw, 0x10);
+                }
+                else
+                {
+                    group.ptr = 0;
+                }
+            }
+            this.uniquesPtr = (UInt32)bw.BaseStream.Position;
+            foreach (var group in this.uniquesData)
+            {
+                bw.Write((UInt32)group.ptr);
+            }
+
+            // Reward Data
+            foreach(var group in this.rewardData)
+            {
+                group.ptr = (UInt32)bw.BaseStream.Position;
+                foreach (var item in group.rewards)
+                {
+                    bw.Write((UInt16)item.chance);
+                    bw.Write((UInt16)item.id);
+                    bw.Write((UInt16)item.amount);
+                }
+                bw.Write((UInt16)0xFFFF);
+            }
+            this.rewardPtr = (UInt32)bw.BaseStream.Position;
+            foreach (var group in this.rewardData)
+            {
+                bw.Write((UInt32)group.type);
+                bw.Write((UInt32)group.ptr);
+            }
+
+            // Actual Progress Strings
+            List<uint> strPtrs = new List<uint>();
+            foreach(var str in this.progressStr)
+            {
+                strPtrs.Add((UInt32)bw.BaseStream.Position);
+                StringHelper.WriteAddNull(bw, str);
+            }
+            bw.BaseStream.Position = this.progStrPtr;
+            foreach(var ptr in strPtrs)
+            {
+                bw.Write((UInt32)ptr);
+            }
+
             // Write Header
             bw.BaseStream.Position = 0;
             bw.Write((UInt32)0x48);
             bw.Write((UInt32)this.startPtr);
-            bw.Write((UInt32)0);
-            bw.Write((UInt32)0);
+            bw.Write((UInt32)this.supplyPtr);
+            bw.Write((UInt32)this.rewardPtr);
             bw.Write((UInt32)this.scriptPtr);
             bw.Write((UInt32)this.sMonPtr);
             bw.Write((UInt32)this.lMonPtr);
+            bw.Write((UInt32)this.zonePtr);
+            bw.Write((UInt32)this.originsPtr);
+            bw.Write((UInt32)this.campPtr);
+            bw.Write((UInt32)this.gatherPtr);
+            bw.Write((UInt32)this.uniquesPtr);
+            bw.Write((UInt32)this.progStrPtr);
+            bw.Write((UInt32)this.monsterHP);
+            bw.Write((UInt32)this.hrp);
+            bw.Write((UInt32)this.onlineFlag);
+
+            bw.Write((UInt16)this.bossSize);
+            bw.Write((byte)this.difficulty);
+            bw.Write((byte)this.spawnID);
+
+            bw.Write((byte)this.bossSizeClass);
+            bw.Write((byte)this.supplyType);
+            bw.Write((byte)this.supplyMon);
+            bw.Write((byte)this.supplyNum);
         }
     }
 }
