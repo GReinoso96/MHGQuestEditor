@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 using System.Threading.Tasks;
+using static QuestConverter.Constants;
 
 namespace MHGQuestEditor.Quest
 {
@@ -116,7 +117,7 @@ namespace MHGQuestEditor.Quest
             this.pos = pos;
             this.unk2 = Convert.ToHexString(unk2);
             this.angle = angle;//Convert.ToSingle(angle/255.0);
-
+            this.name = EntityNames[this.id];
         }
         public UInt16 id;
         public UInt16 variant;
@@ -125,5 +126,6 @@ namespace MHGQuestEditor.Quest
         public UInt32 angle;
         public float[] pos = [];
         public string unk2 = "";
+        public string name = "";
     }
 }

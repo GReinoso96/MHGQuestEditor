@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static QuestConverter.Constants;
 
 namespace QuestConverter.Quest
 {
@@ -61,6 +62,7 @@ namespace QuestConverter.Quest
             this.pos = pos;
             this.unk2 = Convert.ToHexString(unk2);
             this.angle = angle;
+            this.name = EntityNames[id];
         }
         public UInt16 id;
         public UInt16 variant;
@@ -71,5 +73,6 @@ namespace QuestConverter.Quest
         public UInt32 angle;
         public float[] pos;
         public string unk2;
+        public string name = "";
     }
 }

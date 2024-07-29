@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static QuestConverter.Constants;
 
 namespace MHGQuestEditor.Quest
 {
@@ -33,6 +34,8 @@ namespace MHGQuestEditor.Quest
             this.win = StringHelper.ReadUntilNull(br, strPtrs[1]).Replace("\n", "\r\n");
             this.fail = StringHelper.ReadUntilNull(br, strPtrs[2]).Replace("\n", "\r\n");
             this.description = StringHelper.ReadUntilNull(br, strPtrs[3]).Replace("\n", "\r\n");
+
+            this.localeName = LocaleNames[this.locale];
         }
         public byte type;
         public byte questFlags;
@@ -51,5 +54,7 @@ namespace MHGQuestEditor.Quest
         public string win = "";
         public string fail = "";
         public string description = "";
+
+        public string localeName = "";
     }
 }

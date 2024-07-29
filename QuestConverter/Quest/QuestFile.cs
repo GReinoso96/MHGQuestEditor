@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using static MHGQuestEditor.Constants;
+using static QuestConverter.Constants;
 
 namespace MHGQuestEditor.Quest
 {
@@ -159,10 +159,13 @@ namespace MHGQuestEditor.Quest
 
             br.BaseStream.Position = progStrPtr;
 
+            uint firststPtr = 0;
+
             while(true)
             {
                 var strptr = br.ReadUInt32();
-                if (strptr > br.BaseStream.Length || strptr < 0x68) break;
+                if(firststPtr == 0) { firststPtr = strptr; }
+                if (strptr < firststPtr) break;
                 var curPtr = br.BaseStream.Position;
                 var strProg = StringHelper.ReadUntilNull(br,strptr);
                 this.progressStr.Add(strProg);
@@ -233,13 +236,13 @@ namespace MHGQuestEditor.Quest
 
             // Save ptr and write each
             var titlePtr = bw.BaseStream.Position;
-            StringHelper.WriteAddNull(bw, this.questData.title);
+            StringHelper.WriteAddNull(bw, this.questData.title.Replace("\r\n","\n"));
             var winPtr = bw.BaseStream.Position;
-            StringHelper.WriteAddNull(bw, this.questData.win);
+            StringHelper.WriteAddNull(bw, this.questData.win.Replace("\r\n", "\n"));
             var failPtr = bw.BaseStream.Position;
-            StringHelper.WriteAddNull(bw, this.questData.fail);
+            StringHelper.WriteAddNull(bw, this.questData.fail.Replace("\r\n", "\n"));
             var descPtr = bw.BaseStream.Position;
-            StringHelper.WriteAddNull(bw, this.questData.description);
+            StringHelper.WriteAddNull(bw, this.questData.description.Replace("\r\n", "\n"));
 
             // If pos isn't divisible by 4, add zero
             while(bw.BaseStream.Position % 4 != 0) { bw.Write((byte)0); }
@@ -323,13 +326,10 @@ namespace MHGQuestEditor.Quest
             foreach (var smonWave in this.smallMons.waves)
             {
                 bw.Write((UInt32)smonWave.ptr);
-                if(this.smallMons.waves.Count == 1)
-                {
-                    bw.Write((UInt32)0);
-                }
             }
+            bw.Write((UInt32)0);
 
-            foreach(var lmonWave in this.largeMons)
+            foreach (var lmonWave in this.largeMons)
             {
                 lmonWave.dataPtr = (UInt32)bw.BaseStream.Position;
                 foreach (var monster in lmonWave.monsters)
@@ -364,11 +364,8 @@ namespace MHGQuestEditor.Quest
                 bw.Write((UInt32)lmonWave.unk);
                 bw.Write((UInt32)lmonWave.cachePtr);
                 bw.Write((UInt32)lmonWave.dataPtr);
-                if (this.largeMons.Count == 1)
-                {
-                    StringHelper.WriteZero(bw, 0x10);
-                }
             }
+            StringHelper.WriteZero(bw, 0x10);
 
             // Write Script
             this.scriptPtr = (UInt32)bw.BaseStream.Position;

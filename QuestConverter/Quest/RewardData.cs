@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static MHGQuestEditor.Constants;
+using static QuestConverter.Constants;
 
 namespace MHGQuestEditor.Quest
 {
@@ -47,5 +47,6 @@ namespace MHGQuestEditor.Quest
     internal class RewardItem(UInt16 chance, UInt16 id, UInt16 amount)
     {
         public UInt16 chance = chance; public UInt16 id = id; public UInt16 amount = amount;
+        public string name = ItemNames[id];
     }
 }

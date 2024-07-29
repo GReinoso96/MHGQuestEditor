@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static MHGQuestEditor.Constants;
+using static QuestConverter.Constants;
 
 namespace MHGQuestEditor.Quest
 {
@@ -31,11 +31,13 @@ namespace MHGQuestEditor.Quest
     {
         public UInt16 id;
         public UInt16 amount;
+        public string name = "";
 
         public void load(UInt16 id, UInt16 amount)
         {
             this.id = id;
             this.amount = amount;
+            this.name = ItemNames[id];
         }
     }
 }

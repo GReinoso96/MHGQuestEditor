@@ -1,9 +1,8 @@
-﻿using MHGQuestEditor;
-using MHGQuestEditor.Quest;
+﻿using MHGQuestEditor.Quest;
 using Newtonsoft.Json;
 using System.Runtime.CompilerServices;
 using System.Text;
-using static MHGQuestEditor.Constants;
+using static QuestConverter.Constants;
 
 if(args.Length > 0)
 {
