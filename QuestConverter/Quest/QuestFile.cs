@@ -527,6 +527,8 @@ namespace MHGQuestEditor.Quest
                 bw.Write((UInt32)group.type);
                 bw.Write((UInt32)group.ptr);
             }
+            bw.Write((UInt16)0xFFFF);
+            StringHelper.WriteZero(bw, 0x6);
 
             // Actual Progress Strings
             List<uint> strPtrs = new List<uint>();

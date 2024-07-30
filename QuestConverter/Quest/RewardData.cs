@@ -25,19 +25,11 @@ namespace MHGQuestEditor.Quest
                 if (chance == 0xFFFF) { break; }
                 this.rewards.Add(new RewardItem(chance,id,amount));
             }
-            while (this.rewards.Count < 15)
-            {
-                this.rewards.Add(new RewardItem(0, 0, 0));
-            }
         }
 
         public void load(int type)
         {
             this.type=type;
-            while (this.rewards.Count < 15)
-            {
-                this.rewards.Add(new RewardItem(0, 0, 0));
-            }
         }
         public int type;
         public UInt32 ptr;
