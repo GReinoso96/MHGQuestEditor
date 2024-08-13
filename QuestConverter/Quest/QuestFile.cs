@@ -110,7 +110,7 @@ namespace MHGQuestEditor.Quest
             while (true)
             {
                 var zonePtr = br.ReadUInt32();
-                if (zonePtr > br.BaseStream.Length) break;
+                if (zonePtr > br.BaseStream.Length || zonePtr == 0) break;
                 var curpos = br.BaseStream.Position;
                 ZoneGroup zone = new ZoneGroup();
                 zone.load(br, zonePtr);

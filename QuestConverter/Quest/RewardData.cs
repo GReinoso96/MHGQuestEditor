@@ -36,9 +36,21 @@ namespace MHGQuestEditor.Quest
         public List<RewardItem> rewards = new();
     }
 
-    internal class RewardItem(UInt16 chance, UInt16 id, UInt16 amount)
+    internal class RewardItem
     {
-        public UInt16 chance = chance; public UInt16 id = id; public UInt16 amount = amount;
-        public string name = ItemNames[id];
+        public RewardItem(UInt16 chance, UInt16 id, UInt16 amount)
+        {
+            this.chance = chance;
+            this.id = id;
+            this.amount = amount;
+            if(id < ItemNames.Length)
+            {
+                this.name = ItemNames[id];
+            }
+        }
+        public UInt16 chance;
+        public UInt16 id;
+        public UInt16 amount;
+        public string name = "";
     }
 }

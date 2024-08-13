@@ -37,7 +37,10 @@ namespace MHGQuestEditor.Quest
         {
             this.id = id;
             this.amount = amount;
-            this.name = ItemNames[id];
+            if(id < ItemNames.Length)
+            {
+                this.name = ItemNames[id];
+            }
         }
     }
 }
